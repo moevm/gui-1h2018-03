@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -35,3 +35,9 @@ HEADERS += \
 FORMS += \
         mainwindow.ui \
     sets.ui
+
+RESOURCES += \
+    res.qrc
+
+DISTFILES += \
+    res/2.jpg
