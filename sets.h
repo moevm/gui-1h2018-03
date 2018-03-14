@@ -2,7 +2,7 @@
 #define SETS_H
 
 #include <QWidget>
-
+#include "dict.h"
 namespace Ui {
 class sets;
 }
@@ -23,6 +23,7 @@ private slots:
     void on_pushButton_clicked();
 private:
     Ui::sets *ui;
+    dict *myform;
 };
 
 #endif // SETS_H

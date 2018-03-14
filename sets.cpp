@@ -2,30 +2,41 @@
 #include "ui_sets.h"
 #include "QtSql/QSqlDatabase"
 #include "QSqlQuery"
+#include "dict.h"
 sets::sets(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::sets)
 {
     ui->setupUi(this);
+    myform = new dict();
+    connect(ui->button1, SIGNAL(clicked()), myform, SLOT(show()));
+
+
+    // подключаем к слоту запуска главного окна по кнопке во втором окне
+    //  connect(dWindow, &dict::setsWindow, this, &sWindow::show);
+    QPixmap bkgnd(":/res/fon1.jpg");
+   bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Background, bkgnd);
+    this->setPalette(palette);
     //Подключаем базу данных
-   QSqlDatabase db;
-   db = QSqlDatabase::addDatabase("QSQLITE");
-   db.setDatabaseName("/Users/user/words.db");
-   db.open();
 
-   //Осуществляем запрос
-   QSqlQuery query;
-   query.exec("SELECT id, french, russian FROM words ");
+   ui->button1->setFixedSize(100,100);
+   ui->button1->setFlat(true);
+   ui->button1->setIconSize(QSize(100, 100));
 
-   //Выводим значения из запроса
-   while (query.next())
-   {
-   QString _id = query.value(0).toString();
-   QString french = query.value(1).toString();
-   QString russian = query.value(2).toString();
-   ui->textEdit->insertPlainText(_id+" "+french+" "+russian+"\n");
-   ui ->textEdit->insertPlainText("hello");
-   }
+   ui->buttton2->setFixedSize(100,100);
+   ui->buttton2->setFlat(true);
+   ui->buttton2->setIconSize(QSize(100, 100));
+
+   ui->button3->setFixedSize(100,100);
+   ui->button3->setFlat(true);
+   ui->button3->setIconSize(QSize(100, 100));
+
+   ui->button4->setFixedSize(100,100);
+   ui->button4->setFlat(true);
+   ui->button4->setIconSize(QSize(100, 100));
+
 }
 
 sets::~sets()
@@ -40,3 +51,5 @@ void sets::on_pushButton_clicked()
 
 
 }
+
+

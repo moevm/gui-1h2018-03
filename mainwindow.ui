@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>648</width>
-    <height>540</height>
+    <width>553</width>
+    <height>577</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,9 +22,9 @@
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>70</y>
-      <width>271</width>
-      <height>71</height>
+      <y>170</y>
+      <width>191</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -53,9 +53,9 @@ background-color: rgb(52, 78, 127);</string>
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>160</y>
-      <width>271</width>
-      <height>71</height>
+      <y>320</y>
+      <width>191</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -81,9 +81,9 @@ background-color: rgb(52, 78, 127);</string>
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>240</y>
-      <width>271</width>
-      <height>81</height>
+      <y>250</y>
+      <width>191</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -110,9 +110,9 @@ background-color: rgb(52, 78, 127);</string>
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>330</y>
-      <width>271</width>
-      <height>81</height>
+      <y>400</y>
+      <width>191</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -140,7 +140,7 @@ background-color: rgb(52, 78, 127);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>648</width>
+     <width>553</width>
      <height>22</height>
     </rect>
    </property>
