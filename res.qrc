@@ -5,5 +5,14 @@
         <file>res/pen.jpg</file>
         <file>res/statistics.gif</file>
         <file>res/statistics.png</file>
+        <file>res/logo.dms</file>
+        <file>res/logo.png</file>
+        <file>res/fon.png</file>
+        <file>res/pic.jpg</file>
+        <file>res/food.png</file>
+        <file>res/cat.png</file>
+        <file>res/new.png</file>
+        <file>res/shop.png</file>
+        <file>res/fon1.jpg</file>
     </qresource>
 </RCC>
