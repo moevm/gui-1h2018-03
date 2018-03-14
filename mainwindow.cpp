@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "sets.h"
+#include "quest.h"
 #include "QtSql/QSqlDatabase"
 #include "QSqlQuery"
 
@@ -10,7 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     sWindow = new sets();
-
+    Quest1 = new quest();
+    connect(ui->button3, SIGNAL(clicked()), Quest1, SLOT(show()));
 
     // подключаем к слоту запуска главного окна по кнопке во втором окне
       connect(sWindow, &sets::firstWindow, this, &MainWindow::show);
