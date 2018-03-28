@@ -79,16 +79,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::hideSpecialButtons()
 {
-    ui->settingsButton->hide();
-    ui->aboutButton->hide();
+    //ui->settingsButton->hide();
+    //ui->aboutButton->hide();
     ui->exitButton->hide();
     ui->mainpageButton->show();
 }
 
 void MainWindow::showSpecialButtons()
 {
-    ui->settingsButton->show();
-    ui->aboutButton->show();
+   // ui->settingsButton->show();
+  //  ui->aboutButton->show();
     ui->exitButton->show();
     ui->mainpageButton->hide();
 }
@@ -590,7 +590,7 @@ void MainWindow::gameEnd()
 
 }
 
-void MainWindow::resizeBtnUp()
+/*void MainWindow::resizeBtnUp()
 {
     if (actualBtn == "music")
         if(sizeBtn<=190)
@@ -620,38 +620,7 @@ void MainWindow::resizeBtnUp()
         }
 }
 
-void MainWindow::resizeBtnDown()
-{
-    if (actualBtn == "music")
-        if(sizeBtn>=170)
-        {
-            ui->playMusic->setFixedHeight(sizeBtn);
-            ui->playMusic->setFixedWidth(sizeBtn--);
-            tmr_mainDown->start(40);
-            sizeBtn-=2;
-        }
-        else
-        {
-            tmr_mainDown->stop();
-            tmr_mainUp->start(300);
-            actualBtn = "film";
-        }
-    else
-        if(sizeBtn>=170)
-        {
-            ui->playFilm->setFixedHeight(sizeBtn);
-            ui->playFilm->setFixedWidth(sizeBtn--);
-            tmr_mainDown->start(40);
-            sizeBtn-=2;
-        }
-        else
-        {
-            tmr_mainDown->stop();
-            tmr_mainUp->start(3000);
-            actualBtn = "music";
-        }
-}
-
+*/
 void MainWindow::on_tryagainButton_clicked()
 {
     tmr_end->stop();
