@@ -2233,10 +2233,10 @@ background-color: rgb(52, 78, 127);</string>
        </size>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: rgb(255, 255, 255);
-font: 21px &quot;Comic Sans MS&quot;;
+       <string notr="true">color:rgb(16, 128, 64);
+font: italic 18pt &quot;Brokgauz &amp; Efron&quot;;
 border: 0px;
-background-color: rgb(52, 78, 127);</string>
+background-color: rgb(204, 204, 204);</string>
       </property>
       <property name="currentIndex">
        <number>0</number>
@@ -2251,19 +2251,19 @@ background-color: rgb(52, 78, 127);</string>
              <widget class="QLabel" name="answerLabel">
               <property name="font">
                <font>
-                <family>Comic Sans MS</family>
-                <pointsize>-1</pointsize>
+                <family>Brokgauz &amp; Efron</family>
+                <pointsize>18</pointsize>
                 <weight>50</weight>
-                <italic>false</italic>
+                <italic>true</italic>
                 <bold>false</bold>
                </font>
               </property>
               <property name="styleSheet">
-               <string notr="true">color: rgb(255, 255, 255);
-font: 21px &quot;Comic Sans MS&quot;;</string>
+               <string notr="true">font: italic 18pt &quot;Brokgauz &amp; Efron&quot;;
+color:rgb(16, 128, 128);</string>
               </property>
               <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Угадано:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Правильные&lt;/p&gt;&lt;p align=&quot;center&quot;&gt; ответы&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2297,16 +2297,17 @@ font: 21px &quot;Comic Sans MS&quot;;</string>
              <widget class="QLabel" name="timeLabel">
               <property name="font">
                <font>
-                <family>Comic Sans MS</family>
-                <pointsize>-1</pointsize>
+                <family>Brokgauz &amp; Efron</family>
+                <pointsize>18</pointsize>
                 <weight>50</weight>
-                <italic>false</italic>
+                <italic>true</italic>
                 <bold>false</bold>
                </font>
               </property>
               <property name="styleSheet">
-               <string notr="true">color: rgb(255, 255, 255);
-font: 21px &quot;Comic Sans MS&quot;;</string>
+               <string notr="true">color:rgb(128, 0, 2);
+font: italic 18pt &quot;Brokgauz &amp; Efron&quot;;
+</string>
               </property>
               <property name="text">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Время:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -2342,92 +2343,6 @@ font: 21px &quot;Comic Sans MS&quot;;</string>
            </layout>
           </item>
           <item>
-           <widget class="QPushButton" name="loginButton">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>230</width>
-              <height>65</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Comic Sans MS</family>
-              <pointsize>-1</pointsize>
-              <weight>50</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(255, 255, 255);
-background-image: url(:/images/res/button.png);
-font: 21px &quot;Comic Sans MS&quot;;</string>
-            </property>
-            <property name="text">
-             <string>Вход</string>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="signupButton_2">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>230</width>
-              <height>65</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Comic Sans MS</family>
-              <pointsize>-1</pointsize>
-              <weight>50</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(255, 255, 255);
-background-image: url(:/images/res/button.png);
-font: 21px &quot;Comic Sans MS&quot;;</string>
-            </property>
-            <property name="text">
-             <string>Регистрация</string>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QPushButton" name="statButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -2449,18 +2364,17 @@ font: 21px &quot;Comic Sans MS&quot;;</string>
             </property>
             <property name="font">
              <font>
-              <family>Comic Sans MS</family>
-              <pointsize>-1</pointsize>
+              <family>Brokgauz &amp; Efron</family>
+              <pointsize>18</pointsize>
               <weight>50</weight>
-              <italic>false</italic>
+              <italic>true</italic>
               <bold>false</bold>
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(255, 255, 255);
-background-image: url(:/images/res/button.png);
-font: 21px &quot;Comic Sans MS&quot;;</string>
+             <string notr="true">color:rgb(7, 64, 128);
+font: italic 18pt &quot;Brokgauz &amp; Efron&quot;;
+</string>
             </property>
             <property name="text">
              <string>Статистика</string>
@@ -2471,111 +2385,13 @@ font: 21px &quot;Comic Sans MS&quot;;</string>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="rulesButton">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>230</width>
-              <height>65</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Comic Sans MS</family>
-              <pointsize>-1</pointsize>
-              <weight>50</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="layoutDirection">
-             <enum>Qt::LeftToRight</enum>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(255, 255, 255);
-background-image: url(:/images/res/button.png);
-font: 21px &quot;Comic Sans MS&quot;;</string>
-            </property>
-            <property name="text">
-             <string>Правила игры</string>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QPushButton" name="dictionary">
-            <property name="text">
-             <string>PushButton</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="verticalSpacer_35">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="settingsButton">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>230</width>
-              <height>65</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Comic Sans MS</family>
-              <pointsize>-1</pointsize>
-              <weight>50</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(255, 255, 255);
-background-image: url(:/images/res/button.png);
-font: 17px &quot;Comic Sans MS&quot;;</string>
+             <string notr="true">color:rgb(7, 64, 128);
+font: italic 18pt &quot;Brokgauz &amp; Efron&quot;;</string>
             </property>
             <property name="text">
-             <string>Настройки</string>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
+             <string>Словарь</string>
             </property>
            </widget>
           </item>
@@ -2601,64 +2417,19 @@ font: 17px &quot;Comic Sans MS&quot;;</string>
             </property>
             <property name="font">
              <font>
-              <family>Comic Sans MS</family>
-              <pointsize>-1</pointsize>
+              <family>Brokgauz &amp; Efron</family>
+              <pointsize>18</pointsize>
               <weight>50</weight>
-              <italic>false</italic>
+              <italic>true</italic>
               <bold>false</bold>
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(255, 255, 255);
-background-image: url(:/images/res/button.png);
-font: 17px &quot;Comic Sans MS&quot;;</string>
+             <string notr="true">color:rgb(7, 64, 128);
+font: italic 18pt &quot;Brokgauz &amp; Efron&quot;;</string>
             </property>
             <property name="text">
              <string>На главную</string>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="aboutButton">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>230</width>
-              <height>65</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Comic Sans MS</family>
-              <pointsize>-1</pointsize>
-              <weight>50</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(255, 255, 255);
-background-image: url(:/images/res/button.png);
-font: 17px &quot;Comic Sans MS&quot;;</string>
-            </property>
-            <property name="text">
-             <string>Справка</string>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -2687,18 +2458,16 @@ font: 17px &quot;Comic Sans MS&quot;;</string>
             </property>
             <property name="font">
              <font>
-              <family>Comic Sans MS</family>
-              <pointsize>-1</pointsize>
+              <family>Brokgauz &amp; Efron</family>
+              <pointsize>18</pointsize>
               <weight>50</weight>
-              <italic>false</italic>
+              <italic>true</italic>
               <bold>false</bold>
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(255, 255, 255);
-background-image: url(:/images/res/button.png);
-font: 17px &quot;Comic Sans MS&quot;;</string>
+             <string notr="true">color:rgb(7, 64, 128);
+font: italic 18pt &quot;Brokgauz &amp; Efron&quot;;</string>
             </property>
             <property name="text">
              <string>Выход</string>
