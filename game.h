@@ -4,6 +4,7 @@
 #include "player.h"
 #include "music.h"
 #include "film.h"
+#include "gram.h"
 #include <QString>
 #include "QtSql/QSqlDatabase"
 #include "QSqlQuery"
@@ -15,7 +16,7 @@ class Game
 {
 private:
     Player player;
-    QuestCards *questCards[2];
+    QuestCards *questCards[3];
     QSqlDatabase db;
     int currentScore;
     levelType level;

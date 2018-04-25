@@ -1,6 +1,5 @@
 #include "game.h"
 #include <QtMath>
-
 /*
  * Конструктор класса Game по умолчанию
 */
@@ -14,6 +13,7 @@ Game::Game()
 
     questCards[0] = new Music();
     questCards[1] = new Film();
+    questCards[2] = new Gram();
 
     currentScore = 0;
     level = middle;
@@ -48,7 +48,11 @@ void Game::setPlayer(const Player &value)
 
 void Game::setPlayerScore(int value, QString type)
 {
-    type == "music" ? player.setMusicScore(value) : player.setFilmScore(value);
+    if(type == "music")  player.setMusicScore(value);
+    if (type == "films")  player.setFilmScore(value);
+    if (type == "gram")  player.setGramScore(value);
+
+
 }
 
 /* Функция производит логин пользователя.
@@ -68,6 +72,7 @@ bool Game::login(QString name, QString pass)
     QString p;
     int ms = 0;
     int fs = 0;
+    int gs = 0;
     QString t;
 
     while (query.next()) {
@@ -76,10 +81,11 @@ bool Game::login(QString name, QString pass)
         ms = query.value(2).toInt();
         fs = query.value(3).toInt();
         t = query.value(4).toString();
+        gs = query.value(5).toInt();
     }
     if (p == pass)
     {
-        Player p(name, ms, fs, t);
+        Player p(name, ms, fs,gs, t);
         player = p;
 
         return true;
@@ -116,19 +122,21 @@ bool Game::signup(QString name, QString pass)
 
     int ms = player.getMusicScore();
     int fs = player.getFilmScore();
+    int gs = player.getGramScore();
 
     if (!query_check.next() && name != "Player"){
         QSqlQuery query;
-        query.prepare("INSERT INTO players (login, password, music_score, film_score, type)"
-                      "VALUES(?, ?, ?, ?, ?);");
+        query.prepare("INSERT INTO players (login, password, music_score, film_score,gram_score, type)"
+                      "VALUES(?, ?, ?, ?, ?,?);");
         query.addBindValue(name);
         query.addBindValue(pass);
         query.addBindValue(ms);
         query.addBindValue(fs);
+        query.addBindValue(gs);
         query.addBindValue("user");
         query.exec();
 
-        Player p(name, ms, fs, "user");
+        Player p(name, ms, fs,gs, "user");
         player = p;
         return true;
     }
@@ -159,7 +167,7 @@ QSqlQuery Game::getUserFromDB(QString username)
 {
     if (!db.isOpen())
         connectDB();
-    QSqlQuery query("SELECT login, password, music_score, film_score, type "
+    QSqlQuery query("SELECT login, password, music_score, film_score,gram_score, type "
                     "FROM players "
                     "WHERE login IS \"" + username + "\"");
     return query;
@@ -172,7 +180,7 @@ QSqlQuery Game::getStats()
 {
     if (!db.isOpen())
         connectDB();
-    QSqlQuery query("SELECT login, music_score, film_score, (music_score+film_score) as total "
+    QSqlQuery query("SELECT login, music_score, film_score,gram_score, (music_score+film_score+gram_score) as total "
                     "FROM players "
                     "ORDER BY total DESC");
     return query;
@@ -188,7 +196,7 @@ void Game::connectDB()
 
      //  QSqlDatabase db;
        db = QSqlDatabase::addDatabase("QSQLITE");
-        db.setDatabaseName("/Users/user/Downloads/gui-1h2017-14-master-2/db/database.db");
+        db.setDatabaseName("/Users/user/Desktop/french/french/db/database.db");
         db.open();
     }
 }
@@ -204,9 +212,15 @@ bool Game::playGame(QString type)
         return questCards[0]->getContent();
     }
     else
+      if (type == "films")
     {
         return questCards[1]->getContent();
     }
+    else
+          if (type == "gram")
+      {
+          return questCards[2]->getContent();
+      }
 }
 
 /* Функция получения названия для варианта ответа
@@ -219,10 +233,18 @@ QString Game::getAnswer(QString type, int id)
     if (type == "music"){
         return questCards[0]->getRandomAnsName(id-1);
     }
+
     else
+        if (type == "films")
     {
         return questCards[1]->getRandomAnsName(id-1);
     }
+    else
+            if (type == "gram")
+        {
+            return questCards[2]->getRandomAnsName(id-1);
+        }
+
 }
 
 /*
@@ -236,9 +258,15 @@ QString Game::getRightAnswerId(QString type)
         return questCards[0]->getRightAnswerId();
     }
     else
+        if (type == "films")
     {
         return questCards[1]->getRightAnswerId();
     }
+    else
+            if (type == "gram")
+        {
+            return questCards[2]->getRightAnswerId();
+        }
 }
 
 /*
@@ -252,9 +280,15 @@ QString Game::getRightAnswerNameStr(QString type)
         return questCards[0]->getRightAnswerName();
     }
     else
+      if (type == "films")
     {
         return questCards[1]->getRightAnswerName();
     }
+    else
+          if (type == "gram")
+      {
+          return questCards[2]->getRightAnswerName();
+      }
 }
 
 /*
@@ -268,9 +302,13 @@ QString Game::getRightAnswerCount(QString type)
         return questCards[0]->getUsedSize();
     }
     else
+        if (type == "films")
     {
         return questCards[1]->getUsedSize();
     }
+    else
+            if (type == "gram"){
+        return questCards[2]->getUsedSize();}
 }
 
 /*
@@ -285,9 +323,15 @@ bool Game::checkAnswerId(QString type, int id)
         return questCards[0]->checkAnswer(id);
     }
     else
+        if (type == "films")
     {
         return questCards[1]->checkAnswer(id);
     }
+    else
+            if (type == "gram")
+        {
+            return questCards[2]->checkAnswer(id);
+        }
 }
 
 /*
@@ -301,9 +345,15 @@ void Game::eraseContent(QString type)
         questCards[0]->erase();
     }
     else
+        if (type == "films")
     {
         questCards[1]->erase();
     }
+    else
+            if (type == "gram")
+        {
+            questCards[2]->erase();
+        }
 }
 
 /*
@@ -347,9 +397,18 @@ void Game::changeScoreInDB(QString type, int score)
                         "' WHERE login = '" + player.getName()+"'");
     }
     else
+        if (type == "films")
     {
         QSqlQuery query("UPDATE players"
                         " SET film_score = '" + QString::number(score) +
                         "' WHERE login = '" + player.getName()+"'");
     }
+    else
+            if (type == "gram")
+        {
+            QSqlQuery query("UPDATE players"
+                            " SET gram_score = '" + QString::number(score) +
+                            "' WHERE login = '" + player.getName()+"'");
+        }
+
 }

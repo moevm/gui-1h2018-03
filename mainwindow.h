@@ -34,12 +34,17 @@ public:
 private slots:
     void on_playMusic_clicked();
     void on_playFilm_clicked();
+    void on_playGram_clicked();
     void on_mainpageButton_clicked();
-
+    void on_statButton_clicked();
+   // void on_loginButton_clicked();
+    //void on_loginButton_3_clicked();
+    void on_signupButton_clicked();
+    void on_signupButton_2_clicked();
     void on_cancelButton_clicked();
     void on_cancelButton_2_clicked();
-    void on_settingsButton_clicked();
-    void on_aboutButton_clicked();
+ //   void on_settingsButton_clicked();
+  //  void on_aboutButton_clicked();
     void on_rulesButton_clicked();
     void on_exitButton_clicked();
 
@@ -51,6 +56,10 @@ private slots:
     void on_answerButton_6_clicked();
     void on_answerButton_7_clicked();
     void on_answerButton_8_clicked();
+    void on_answerButton_9_clicked();
+    void on_answerButton_10_clicked();
+    void on_answerButton_11_clicked();
+    void on_answerButton_12_clicked();
     void on_tryagainButton_clicked();
 
     void on_bkgdMusicVolumeSlider_valueChanged(int value);
@@ -61,10 +70,8 @@ private slots:
     void updateButton();
     void returnButton();
     void gameEnd();
-  //  void resizeBtnUp();
-
-
-    void on_dictionary_clicked();
+    void resizeBtnUp();
+    void resizeBtnDown();
 
 private:
     Ui::MainWindow *ui;
@@ -89,26 +96,24 @@ sets *sWindow;
     int lenBtn;
     QObject *buttonToUpd;
 
- /*   void hideUserInfo();
+    void hideUserInfo();
     void showUserInfo();
     void hideScoreInfo();
     void showScoreInfo();
-    */
     void hideSpecialButtons();
     void showSpecialButtons();
-   /* void hideLoginButtons();
+    void hideLoginButtons();
     void showLoginButtons();
-    */
     void installEventFilterOnBtns();
     void removeEventFilterOnBtns();
 
-//    void statsOut();
+    void statsOut();
     void howtoOut();
     void aboutOut();
     void updatePlayScreen();
     void checkAnswer(int id);
     void backgroundMusic();
-   // void setNameAndScore();
+    void setNameAndScore();
     void playerLose(QString message);
     void playerWin();
     void changeCurrentScore(int value);

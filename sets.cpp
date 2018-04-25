@@ -19,16 +19,16 @@ sets::sets(QWidget *parent) :
     connect(ui->button2, SIGNAL(clicked()), myform1, SLOT(show()));
     connect(ui->button3, SIGNAL(clicked()), myform2, SLOT(show()));
     connect(ui->button4, SIGNAL(clicked()), myform3, SLOT(show()));
-    //myform = new dict();
-   // connect(ui->button1, SIGNAL(clicked()), myform, SLOT(show()));
+    myform = new dict();
+    connect(ui->button1, SIGNAL(clicked()), myform, SLOT(show()));
 
 
-    // подключаем к слоту запуска главного окна по кнопке во втором окне
-    //  connect(dWindow, &dict::setsWindow, this, &sWindow::show);
+   // подключаем к слоту запуска главного окна по кнопке во втором окне
+      //connect(dWindow, &dict::setsWindow, this, &sWindow::show);
    QPixmap bkgnd(":/images/res/background.jpg");
-   bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
-   QPalette palette;
-   palette.setBrush(QPalette::Background, bkgnd);
+  bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+  QPalette palette;
+  palette.setBrush(QPalette::Background, bkgnd);
    this->setPalette(palette);
     //Подключаем базу данных
 

@@ -144,8 +144,13 @@ void MainWindow::installEventFilterOnBtns()
     ui->answerButton_6->installEventFilter(this);
     ui->answerButton_7->installEventFilter(this);
     ui->answerButton_8->installEventFilter(this);
+    ui->answerButton_9->installEventFilter(this);
+    ui->answerButton_10->installEventFilter(this);
+    ui->answerButton_11->installEventFilter(this);
+    ui->answerButton_12->installEventFilter(this);
     ui->pageMusic->installEventFilter(this);
     ui->pageFilm->installEventFilter(this);
+    ui->pageGram->installEventFilter(this);
 }
 
 void MainWindow::removeEventFilterOnBtns()
@@ -158,8 +163,13 @@ void MainWindow::removeEventFilterOnBtns()
     ui->answerButton_6->removeEventFilter(this);
     ui->answerButton_7->removeEventFilter(this);
     ui->answerButton_8->removeEventFilter(this);
+    ui->answerButton_9->removeEventFilter(this);
+    ui->answerButton_10->removeEventFilter(this);
+    ui->answerButton_11->removeEventFilter(this);
+    ui->answerButton_12->removeEventFilter(this);
     ui->pageMusic->removeEventFilter(this);
     ui->pageFilm->removeEventFilter(this);
+    ui->pageGram->removeEventFilter(this);
 }
 
 void MainWindow::on_playMusic_clicked()
@@ -192,6 +202,27 @@ void MainWindow::on_playFilm_clicked()
     changeCurrentScore(0);
 
     ui->gameWidget->setCurrentWidget(ui->pageFilm);
+    showUserInfo();
+    showScoreInfo();
+    hideLoginButtons();
+    hideSpecialButtons();
+
+    tmr->start();
+
+    game.eraseContent(actualGame);
+
+    updatePlayScreen();
+
+    installEventFilterOnBtns();
+}
+void MainWindow::on_playGram_clicked()
+{
+    actualGame = "gram";
+    checkInGame = true;
+
+    changeCurrentScore(0);
+
+    ui->gameWidget->setCurrentWidget(ui->pageGram);
     showUserInfo();
     showScoreInfo();
     hideLoginButtons();
@@ -381,7 +412,26 @@ void MainWindow::on_answerButton_8_clicked()
     checkAnswer(4);
 }
 
+void MainWindow::on_answerButton_9_clicked()
+{
+    checkAnswer(1);
+}
 
+void MainWindow::on_answerButton_10_clicked()
+{
+    checkAnswer(2);
+
+}
+
+void MainWindow::on_answerButton_11_clicked()
+{
+    checkAnswer(3);
+}
+
+void MainWindow::on_answerButton_12_clicked()
+{
+    checkAnswer(4);
+}
 void MainWindow::on_cancelButton_2_clicked()
 {
     on_mainpageButton_clicked();
@@ -446,18 +496,21 @@ void MainWindow::statsOut()
     QSqlQuery query = game.getStats();
 
     QString html;
-    html = "<center><table width=\"470\"><tr><td style=\"padding: 10px 0px 0px 10px\" width=\"120\"><b>Игрок</b></td><td style=\"padding: 10px 0px 0px 5px\"><b>Музыка</b></td>"
-           "<td style=\"padding: 10px 0px 0px 5px\"><b>Фильмы</b></td><td style=\"padding: 10px 0px 0px 5px\"><b>Всего</b></td></tr>";
+    html = "<center><table width=\"470\"><tr><td style=\"padding: 10px 0px 0px 10px\" width=\"120\"><b>Игрок</b></td><td style=\"padding: 10px 0px 0px 5px\"><b>Аудирование</b></td>"
+           "<td style=\"padding: 10px 0px 0px 5px\"><b>Слова по картинке</b></td><td style=\"padding: 10px 0px 0px 5px\"><b>Грамматика</b></td><td style=\"padding: 10px 0px 0px 5px\"><b>Всего</b></td></tr>";
 
     while (query.next())
         {
         QString login = query.value(0).toString();
         QString music_score = query.value(1).toString();
         QString film_score = query.value(2).toString();
-        int total = music_score.toInt() + film_score.toInt();
+        QString gram_score = query.value(3).toString();
+        int total = music_score.toInt() + film_score.toInt()+ gram_score.toInt();
         html += "<tr><td style=\"padding: 5px 0px 0px 10px\">" + login + "</td><td style=\"padding: 5px 0px 0px 5px\">" +
                 music_score + "</td><td style=\"padding: 5px 0px 0px 5px\">" +
-                film_score + "</td><td style=\"padding: 5px 0px 0px 5px\">" + QString::number(total) + "</td></tr>";
+                film_score + "</td><td style=\"padding: 5px 0px 0px 5px\">" +
+                gram_score + "</td><td style=\"padding: 5px 0px 0px 5px\">" +
+                QString::number(total) + "</td></tr>";
         }
     html += "</table></center>";
     ui->statBrowser->insertHtml(html);
@@ -484,6 +537,8 @@ void MainWindow::updatePlayScreen()
             ui->answerButton_4->setText(game.getAnswer(actualGame, 4));
         }
         else
+        if (actualGame == "films")
+
         {
             ui->filmLabel->setPixmap(QPixmap("/Users/user/Downloads/films/" +
                                              game.getRightAnswerId(actualGame) + ".jpg"));
@@ -495,6 +550,20 @@ void MainWindow::updatePlayScreen()
             ui->answerButton_6->setText(game.getAnswer(actualGame, 2));
             ui->answerButton_7->setText(game.getAnswer(actualGame, 3));
             ui->answerButton_8->setText(game.getAnswer(actualGame, 4));
+        }
+        else
+             if (actualGame == "gram")
+        {
+            ui->gramLabel->setPixmap(QPixmap("/Users/user/Desktop/french/french/gram/" +
+                                             game.getRightAnswerId(actualGame) + ".jpg"));
+            ui->gramLabel->setScaledContents(true);
+            ui->gramLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+
+            ui->countRightAnswers->setText(game.getRightAnswerCount(actualGame));
+            ui->answerButton_9->setText(game.getAnswer(actualGame, 1));
+            ui->answerButton_10->setText(game.getAnswer(actualGame, 2));
+            ui->answerButton_11->setText(game.getAnswer(actualGame, 3));
+            ui->answerButton_12->setText(game.getAnswer(actualGame, 4));
         }
         ui->secondsLabel->setText(QString::number(seconds = maxSeconds));
     }
@@ -514,9 +583,16 @@ void MainWindow::checkAnswer(int id)
                        + game.getRightAnswerNameStr(actualGame) + "\".<br><br>Ваш счет: "+QString::number(game.getCurrentScore())
                        +"</center></td></tr></table>");
         else
+            if (actualGame == "films")
             playerLose("<table width=\"490\"><tr><td style=\"padding: 140px 10px 10px 10px;\"><center>Неверный ответ!<br>Это был фильм \""
                        + game.getRightAnswerNameStr(actualGame) + "\".<br><br>Ваш счет: "+QString::number(game.getCurrentScore())
                        +"</center></td></tr></table>");
+        else
+                if (actualGame == "gram")
+                playerLose("<table width=\"490\"><tr><td style=\"padding: 140px 10px 10px 10px;\"><center>Неверный ответ!<br>Это был фильм \""
+                           + game.getRightAnswerNameStr(actualGame) + "\".<br><br>Ваш счет: "+QString::number(game.getCurrentScore())
+                           +"</center></td></tr></table>");
+
     }
 }
 
@@ -636,14 +712,60 @@ void MainWindow::updateButton()
         else
             ui->answerButton_7->setText(ui->answerButton_7->text().remove(0,1));
     }
-    if (buttonToUpd->objectName() == "answerButton_8"){
-        if (fm.width(ui->answerButton_8->text()) <= lenBtn){
+    if (buttonToUpd->objectName() == "answerButton_8")
+    {
+        if (fm.width(ui->answerButton_8->text()) <= lenBtn)
+        {
             tmr_btn->stop();
             ui->answerButton_8->setText(game.getAnswer(actualGame, 4));
             tmr_btn->start(3000);
         }
         else
             ui->answerButton_8->setText(ui->answerButton_8->text().remove(0,1));
+    }
+    if (buttonToUpd->objectName() == "answerButton_8")
+    {
+        if (fm.width(ui->answerButton_9->text()) <= lenBtn)
+        {
+            tmr_btn->stop();
+            ui->answerButton_9->setText(game.getAnswer(actualGame, 1));
+            tmr_btn->start(3000);
+        }
+        else
+            ui->answerButton_9->setText(ui->answerButton_9->text().remove(0,1));
+    }
+    if (buttonToUpd->objectName() == "answerButton_10")
+    {
+        if (fm.width(ui->answerButton_10->text()) <= lenBtn)
+        {
+            tmr_btn->stop();
+            ui->answerButton_10->setText(game.getAnswer(actualGame, 2));
+            tmr_btn->start(3000);
+        }
+        else
+            ui->answerButton_10->setText(ui->answerButton_10->text().remove(0,1));
+    }
+    if (buttonToUpd->objectName() == "answerButton_11")
+    {
+        if (fm.width(ui->answerButton_11->text()) <= lenBtn)
+        {
+            tmr_btn->stop();
+            ui->answerButton_11->setText(game.getAnswer(actualGame, 3));
+            tmr_btn->start(3000);
+        }
+        else
+            ui->answerButton_11->setText(ui->answerButton_11->text().remove(0,1));
+    }
+    if (buttonToUpd->objectName() == "answerButton_12")
+    {
+        if (fm.width(ui->answerButton_12->text()) <= lenBtn)
+        {
+            tmr_btn->stop();
+            ui->answerButton_12->setText(game.getAnswer(actualGame, 4));
+            tmr_btn->start(3000);
+        }
+        else
+            ui->answerButton_12->setText(ui->answerButton_12->text().remove(0,1));
     }
 }
 
@@ -658,12 +780,20 @@ void MainWindow::returnButton()
         ui->answerButton_4->setText(game.getAnswer(actualGame, 4));
     }
     else
+        if(actualGame == "films")
     {
         ui->answerButton_5->setText(game.getAnswer(actualGame, 1));
         ui->answerButton_6->setText(game.getAnswer(actualGame, 2));
         ui->answerButton_7->setText(game.getAnswer(actualGame, 3));
         ui->answerButton_8->setText(game.getAnswer(actualGame, 4));
     }
+    else
+        {
+            ui->answerButton_9->setText(game.getAnswer(actualGame, 1));
+            ui->answerButton_10->setText(game.getAnswer(actualGame, 2));
+            ui->answerButton_11->setText(game.getAnswer(actualGame, 3));
+            ui->answerButton_12->setText(game.getAnswer(actualGame, 4));
+        }
 
 }
 
@@ -701,13 +831,24 @@ void MainWindow::playerLose(QString message)
             game.setPlayerScore(game.getCurrentScore(), actualGame);
             game.changeScoreInDB(actualGame, game.getCurrentScore());
         }
-    }else {
-        if (game.getPlayer().getFilmScore() < game.getCurrentScore()){
+    }else
+        if (actualGame == "films")
+    {
+        if (game.getPlayer().getFilmScore() < game.getCurrentScore())
+        {
             game.setPlayerScore(game.getCurrentScore(), actualGame);
             game.changeScoreInDB(actualGame, game.getCurrentScore());
         }
     }
-
+        else
+            if (actualGame == "gram")
+        {
+            if (game.getPlayer().getGramScore() < game.getCurrentScore())
+            {
+                game.setPlayerScore(game.getCurrentScore(), actualGame);
+                game.changeScoreInDB(actualGame, game.getCurrentScore());
+            }
+        }
     backgroundMusic();
     on_statButton_clicked();
     ui->tryagainButton->show();
@@ -727,12 +868,23 @@ void MainWindow::playerWin()
             game.getPlayer().setMusicScore(game.getCurrentScore());
             game.changeScoreInDB(actualGame, game.getCurrentScore());
         }
-    }else {
+    }else
+        if (actualGame == "films")
+
+    {
         if (game.getPlayer().getFilmScore() < game.getCurrentScore()){
             game.getPlayer().setFilmScore(game.getCurrentScore());
             game.changeScoreInDB(actualGame, game.getCurrentScore());
         }
     }
+    else
+            if (actualGame == "gram")
+        {
+            if (game.getPlayer().getGramScore() < game.getCurrentScore()){
+                game.getPlayer().setGramScore(game.getCurrentScore());
+                game.changeScoreInDB(actualGame, game.getCurrentScore());
+            }
+        }
     backgroundMusic();
     on_statButton_clicked();
     ui->tryagainButton->show();
@@ -741,6 +893,10 @@ void MainWindow::playerWin()
     if (actualGame == "music")
         ui->countRightAnswers->setText(QString::number((game.getRightAnswerCount(actualGame)).toInt()+1));
     else
+        if (actualGame == "films")
+        ui->countRightAnswers->setText(QString::number((game.getRightAnswerCount(actualGame)).toInt()+1));
+    else
+        if (actualGame == "gram")
         ui->countRightAnswers->setText(QString::number((game.getRightAnswerCount(actualGame)).toInt()+1));
     tmr->stop();
     tmr_end->start();
@@ -770,6 +926,7 @@ void MainWindow::resizeBtnUp()
             tmr_mainDown->start();
         }
     else
+        if (actualBtn == "films")
         if(sizeBtn<=190)
         {
             ui->playFilm->setFixedHeight(sizeBtn);
@@ -782,6 +939,20 @@ void MainWindow::resizeBtnUp()
             tmr_mainUp->stop();
             tmr_mainDown->start();
         }
+    else
+            if (actualBtn == "gram")
+            if(sizeBtn<=190)
+            {
+                ui->playFilm->setFixedHeight(sizeBtn);
+                ui->playFilm->setFixedWidth(sizeBtn);
+                tmr_mainUp->start(40);
+                sizeBtn+=2;
+            }
+            else
+            {
+                tmr_mainUp->stop();
+                tmr_mainDown->start();
+            }
 }
 
 void MainWindow::resizeBtnDown()
@@ -801,6 +972,7 @@ void MainWindow::resizeBtnDown()
             actualBtn = "film";
         }
     else
+        if (actualBtn == "film")
         if(sizeBtn>=170)
         {
             ui->playFilm->setFixedHeight(sizeBtn);
@@ -812,9 +984,26 @@ void MainWindow::resizeBtnDown()
         {
             tmr_mainDown->stop();
             tmr_mainUp->start(3000);
-            actualBtn = "music";
+            actualBtn = "gram";
         }
-}
+    else
+            if (actualBtn == "gram")
+            if(sizeBtn>=170)
+            {
+                ui->playGram->setFixedHeight(sizeBtn);
+                ui->playGram->setFixedWidth(sizeBtn--);
+                tmr_mainDown->start(40);
+                sizeBtn-=2;
+            }
+            else
+            {
+                tmr_mainDown->stop();
+                tmr_mainUp->start(3000);
+                actualBtn = "music";
+            }
+
+
+        }
 
 void MainWindow::on_tryagainButton_clicked()
 {
@@ -822,8 +1011,11 @@ void MainWindow::on_tryagainButton_clicked()
     if (actualGame == "music")
         on_playMusic_clicked();
     else
+        if (actualGame == "films")
         on_playFilm_clicked();
-
+    else
+if (actualGame == "gram")
+        on_playGram_clicked();
 }
 
 void MainWindow::changeCurrentScore(int value)
@@ -858,6 +1050,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
         event->accept();
         game.changeScoreInDB("music", game.getPlayer().getMusicScore());
         game.changeScoreInDB("film", game.getPlayer().getFilmScore());
+        game.changeScoreInDB("gram", game.getPlayer().getGramScore());
     }
 }
 
@@ -894,8 +1087,13 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
             (obj == (QObject*)ui->answerButton_6)||
             (obj == (QObject*)ui->answerButton_7)||
             (obj == (QObject*)ui->answerButton_8)||
+            (obj == (QObject*)ui->answerButton_9)||
+            (obj == (QObject*)ui->answerButton_10)||
+            (obj == (QObject*)ui->answerButton_11)||
+            (obj == (QObject*)ui->answerButton_12)||
             (obj == (QObject*)ui->pageMusic)||
-            (obj == (QObject*)ui->pageFilm))
+            (obj == (QObject*)ui->pageFilm)||
+            (obj == (QObject*)ui->pageGram))
     {
         if (event->type() == QEvent::HoverEnter)
         {
@@ -907,7 +1105,9 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
             returnButton();
         }
         return QWidget::eventFilter(obj, event);
-    }else {
+}
+    else
+    {
         return QWidget::eventFilter(obj, event);
     }
 }
