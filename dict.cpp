@@ -4,42 +4,43 @@
 #include "QtSql/QSqlDatabase"
 #include "QSqlQuery"
 #include <QDebug>
+#include "game.h"
 
 dict::dict(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::dict)
 {
     ui->setupUi(this);
- /*  QSqlDatabase db1;
-  db1 = QSqlDatabase::addDatabase("QSQLITE");
-   db1.setDatabaseName("/Users/user/eda.db");
-   db1.open();
+   /* QSqlQuery query("SELECT id, name FROM " + type + " WHERE id IS \"" + QString::number(randomId.at(id)) + "\"");
+    QString id_str;
+    QString name_str;
+    while (query.next())
+        {
+        id_str = query.value(0).toString();
+        name_str = query.value(1).toString();
+        }
 
-    //Осуществляем запрос
-    QSqlQuery query1;
-    query1.exec("SELECT id, french, trans, rus FROM eda ");
+    return name_str;
+    */
+    //onnectDB();
+    QSqlQuery query;
+    query.exec("SELECT id, fr, trans, rus FROM words_animals ");
 
 
     //Выводим значения из запроса
-    while (query1.next())
+    while (query.next())
     {
-    QString id = query1.value(0).toString();
+    QString id = query.value(0).toString();
     qDebug() << id;
-    QString french = query1.value(1).toString();
-    QString trans = query1.value(2).toString();
-    QString rus = query1.value(3).toString();
-    ui->textBrowser1->insertPlainText(french+"\n");
+    QString fr = query.value(1).toString();
+    QString trans = query.value(2).toString();
+    QString rus = query.value(3).toString();
+    ui->textBrowser1->insertPlainText(fr+"\n");
     ui->textBrowser2->insertPlainText(trans+"\n");
     ui->textBrowser3->insertPlainText(rus+"\n");
 
 
     }
-    */
-    QPixmap bkgnd(":/images/res/background.jpg");
-   bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    this->setPalette(palette);
 }
 
 dict::~dict()
