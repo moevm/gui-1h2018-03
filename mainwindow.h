@@ -37,8 +37,8 @@ private slots:
     void on_playGram_clicked();
     void on_mainpageButton_clicked();
     void on_statButton_clicked();
-   // void on_loginButton_clicked();
-    //void on_loginButton_3_clicked();
+   void on_loginButton_clicked();
+    void on_loginButton_3_clicked();
     void on_signupButton_clicked();
     void on_signupButton_2_clicked();
     void on_cancelButton_clicked();
@@ -72,6 +72,8 @@ private slots:
     void gameEnd();
     void resizeBtnUp();
     void resizeBtnDown();
+
+
 
 private:
     Ui::MainWindow *ui;

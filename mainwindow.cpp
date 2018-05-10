@@ -16,8 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     lenBtn = 320;
     checkInGame = false;
 
-    ui->bkgdMusicVolumeSlider->setValue(bkgdMusicValue);
-    ui->musicPlayerVolumeSlider->setValue(musicPlayerValue);
+    //ui->bkgdMusicVolumeSlider->setValue(bkgdMusicValue);
+    //ui->musicPlayerVolumeSlider->setValue(musicPlayerValue);
 
     QPixmap bkgnd(":/images/res/background.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
@@ -214,6 +214,29 @@ void MainWindow::on_playFilm_clicked()
     updatePlayScreen();
 
     installEventFilterOnBtns();
+}
+
+
+void MainWindow::on_loginButton_3_clicked()
+{
+    if (ui->username->text() != "" && ui->password->text() != "")
+    {
+        if (game.login(ui->username->text(), ui->password->text()))
+        {
+            setNameAndScore();
+            on_mainpageButton_clicked();
+        }
+        else
+        {
+            ui->label_5->setText("<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">"
+                                 "Неправильный логин и/или пароль!</span></p></body></html>");
+        }
+    }
+    else
+    {
+        ui->label_5->setText("<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">"
+                             "Все поля должны быть заполнены!</span></p></body></html>");
+    }
 }
 void MainWindow::on_playGram_clicked()
 {
@@ -579,17 +602,17 @@ void MainWindow::checkAnswer(int id)
     else
     {
         if (actualGame == "music")
-            playerLose("<table width=\"490\"><tr><td style=\"padding: 140px 10px 10px 10px;\"><center>Неверный ответ!<br>Это был трек \""
+            playerLose("<table width=\"490\"><tr><td style=\"padding: 140px 10px 10px 10px;\"><center>Неверный ответ!<br>Это был \""
                        + game.getRightAnswerNameStr(actualGame) + "\".<br><br>Ваш счет: "+QString::number(game.getCurrentScore())
                        +"</center></td></tr></table>");
         else
             if (actualGame == "films")
-            playerLose("<table width=\"490\"><tr><td style=\"padding: 140px 10px 10px 10px;\"><center>Неверный ответ!<br>Это был фильм \""
+            playerLose("<table width=\"490\"><tr><td style=\"padding: 140px 10px 10px 10px;\"><center>Неверный ответ!<br>Это был  \""
                        + game.getRightAnswerNameStr(actualGame) + "\".<br><br>Ваш счет: "+QString::number(game.getCurrentScore())
                        +"</center></td></tr></table>");
         else
                 if (actualGame == "gram")
-                playerLose("<table width=\"490\"><tr><td style=\"padding: 140px 10px 10px 10px;\"><center>Неверный ответ!<br>Это был фильм \""
+                playerLose("<table width=\"490\"><tr><td style=\"padding: 140px 10px 10px 10px;\"><center>Неверный ответ!<br>Это был \""
                            + game.getRightAnswerNameStr(actualGame) + "\".<br><br>Ваш счет: "+QString::number(game.getCurrentScore())
                            +"</center></td></tr></table>");
 
@@ -1113,3 +1136,12 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 }
 
 
+
+void MainWindow::on_loginButton_clicked()
+{
+    ui->gameWidget->setCurrentWidget(ui->pageLogin);
+    showUserInfo();
+    hideLoginButtons();
+
+    hideSpecialButtons();
+}
